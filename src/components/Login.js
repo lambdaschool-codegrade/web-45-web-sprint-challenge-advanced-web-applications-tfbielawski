@@ -43,17 +43,11 @@ const Login = () => {
       //localStorage.setItem("token", res.data.token);
       localStorage.setItem("token", res.data.payload);
       //Redirect to protected content
-      push("/protected");
+      push("/bubbles");
     })
-
-    //credentials validation logic
-    if (credentials.username !== "Lambda" || credentials.password !== "School"){
-      setErrorMessage("username or password is incorrect.")
-    }
 
   }
 
-  
 
     return (
       <div>
@@ -83,7 +77,7 @@ const Login = () => {
             onChange ={handleChange}
             placeholder = {"password"}
           />
-          <button>Login</button>
+          <button id = "submit">Login</button>
         </form>
       </div>
     );

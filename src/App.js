@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
 import BubblePage from "./components/BubblePage";
@@ -17,21 +17,18 @@ function App() {
       //.post("/logout")
       .then(res => {
         localStorage.removeItem("token");
-        localStorage.removeItem("role", res.data.role);
-        localStorage.removeItem("username", res.data.username);
+
         window.location.href = "LogIn";
       })
 
-      .catch(err =>{
-        console.log(err)
-      })
+      .catch(err =>{ console.log(err);})
 
   }
 
  
   return (
     <Router>
-      <PrivateRoute exact path='/protected' component={BubblePage} />
+      <PrivateRoute exact path="/bubbles" component={BubblePage} />
       <Route exact path = "/login" component = {Login}/>
       <Route exact path = "/" component = {Login}/>
       

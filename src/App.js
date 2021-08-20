@@ -6,9 +6,9 @@ import axiosWithAuth from "./helpers/axiosWithAuth";
 import Login from "./components/Login";
 import "./styles.scss";
 
-//
+//Main app function0
 function App() {
-  //
+  //logout function
   const logout = () => {
     console.log("LOGOUT");
     //
@@ -26,8 +26,7 @@ function App() {
       })
 
   }
-  
-  
+
  
   return (
     <Router>

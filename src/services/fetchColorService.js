@@ -13,9 +13,7 @@ const fetchColorService = () => {
             return (res.data);
         })
         //Log the errors
-        .catch((err) => {
-            console.log(err);
-        })
+        .catch((err) => {console.log(err); })
 }
 
 //Export the function

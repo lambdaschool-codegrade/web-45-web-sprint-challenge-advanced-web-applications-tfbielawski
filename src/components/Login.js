@@ -14,7 +14,7 @@ const Login = () => {
   })
   
   //Declare and init error state
-  const [error, setError] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   //Declare variable to hold base URL
   const baseUrl = "http://localhost:5000/api";
   //Destructure push from useHistory to redirect
@@ -47,17 +47,14 @@ const Login = () => {
     })
 
     //credentials validation logic
-    if (credentials.username === "" || credentials.password === "") {
-      setError("Username and password are required.") 
-    } 
-    
-    else if (credentials.username !== "Lambda" || credentials.password !== "School"){
-      setError("Incorrect username or password.")
+    if (credentials.username !== "Lambda" || credentials.password !== "School"){
+      setErrorMessage("username or password is incorrect.")
     }
 
   }
 
   
+
     return (
       <div>
         <h1>Welcome to the Bubble App!</h1>
@@ -66,7 +63,7 @@ const Login = () => {
         </div>
   
         {/* Show errors */}
-        <p id="error" className="error">{error}</p>
+        <p id="error" className="error">{errorMessage}</p>
 
         {/* Begin Form */}
         <form onSubmit={login}>

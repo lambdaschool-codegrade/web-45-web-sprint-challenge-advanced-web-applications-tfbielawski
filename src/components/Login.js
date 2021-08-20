@@ -14,7 +14,7 @@ const Login = () => {
   })
   
   //Declare and init error state
-  const [errorMessage, setErrorMessage] = useState("");
+  const [error, setError] = useState("");
   //Declare variable to hold base URL
   const baseUrl = "http://localhost:5000/api";
   //Destructure push from useHistory to redirect
@@ -46,8 +46,12 @@ const Login = () => {
       push("/bubbles");
     })
 
+    //Set the error state
+    .catch(error => {
+      setError(error);
+      console.log(error);
+    })
   }
-
 
     return (
       <div>
@@ -57,7 +61,7 @@ const Login = () => {
         </div>
   
         {/* Show errors */}
-        <p id="error" className="error">{errorMessage}</p>
+        <p id="error" className="error">{error}</p>
 
         {/* Begin Form */}
         <form onSubmit={login}>

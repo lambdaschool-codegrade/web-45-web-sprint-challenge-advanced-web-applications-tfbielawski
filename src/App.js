@@ -31,7 +31,7 @@ function App() {
  
   return (
     <Router>
-      {/* <PrivateRoute exact path='/protected' component={BubblePage} /> */}
+      <PrivateRoute exact path='/protected' component={BubblePage} />
       <Route exact path = "/login" component = {Login}/>
       <Route exact path = "/" component = {Login}/>
       

@@ -14,6 +14,7 @@ function App() {
     //
     axiosWithAuth()
       .post("/api/logout")
+      //.post("/logout")
       .then(res => {
         localStorage.removeItem("token");
         localStorage.removeItem("role", res.data.role);

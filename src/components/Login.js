@@ -1,61 +1,64 @@
 import axios from "axios";
-import React from "react";
+import React, {useState} from "react";
+import { useHistory } from "react-router";
 
 // make a post request to retrieve a token from the api
 // when you have handled the token, navigate to the BubblePage route
 
-class Login extends React.Component {
+const Login = () => {
   
-  //Declare and init state
-  state = {
-    //initial credentials state
-    credentials: {
+  //Declare and init credential state
+  const [credentials, setCredentials] = useState({
       username: "",
       password: ""
-    },
-    //initial error state
-    // error:  "",
-  };
+  })
+  
+  //Declare and init error state
+  const [error, setError] = useState("");
+  //Declare variable to hold base URL
+  const baseUrl = "http://localhost:5000/api";
+  //Destructure push from useHistory to redirect
+  const {push} = useHistory();
 
   //Change handler
-  handleChange(event){
-    //Set state
-    this.setState({
-        credentials: {
-            ...this.state.credentials,
-            [event.target.name]: event.target.value
-        },
-        // error: {
-        //   ...this.state.error,
-        // }
-    })
-}
+  const handleChange = (event) => {
+    //Set credential state
+    setCredentials({
+      //Spread in current state of credentials
+      ...credentials,
+      [event.target.name]: event.target.value
+     })
+  }
 
   //error = "Username or Password not valid.";
   //replace with error state
 
-  login(event){
+  const login = (event) => {
     //Prevent default behavior
     event.preventDefault();
-    //Axios post calls server
-    axios.post("http://localhost:5000/api/login", this.state.credentials)
-    //then it sets the token
+    //Axios post calls server, interpolate baseURL, pass in credentials state
+    axios.post(`${baseUrl}/login`, credentials)
+    //then set the token
     .then(res =>{
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("role", res.data.role);
-      localStorage.setItem("username", res.data.username);
-      //localStorage.setItem("password", res.data.password);
-      this.props.history.push("/protected");
+      //localStorage.setItem("token", res.data.token);
+      localStorage.setItem("token", res.data.payload);
+      //Redirect to protected content
+      push("/protected");
     })
+
+    //credentials validation logic
+    if (credentials.username === "" || credentials.password === "") {
+      setError("Username and password are required.") 
+    } 
+    
+    else if (credentials.username !== "Lambda" || credentials.password !== "School"){
+      setError("Incorrect username or password.")
+    }
+
   }
 
-  // if (credentials.username === "" || credentials.password === '') {
-  //   setError('Username and password are required.') 
-  // } else if (credentials.username !== 'Lambda' || credentials.password !== 'School'){
-  //   setError('Incorrect username or password.')
-  // }
-
-  render(){
+  
+  
     return (
       <div>
         <h1>Welcome to the Bubble App!</h1>
@@ -64,24 +67,24 @@ class Login extends React.Component {
         </div>
   
         {/* Show errors */}
-        <p id="error" className="error">{this.state.error}</p>
+        <p id="error" className="error">{error}</p>
 
         {/* Begin Form */}
-        <form onSubmit={this.login}>
+        <form onSubmit={login}>
           <input
             id = "username"
             type = "text"
             name = "username"
-            value = {this.state.credentials.username}
-            onChange = {this.handleChange}
+            value = {credentials.username}
+            onChange = {handleChange}
             placeholder = {"username"}
           />
           <input
             id = "password"
             type ="password"
             name ="password"
-            value ={this.state.credentials.password}
-            onChange ={this.handleChange}
+            value ={credentials.password}
+            onChange ={handleChange}
             placeholder = {"password"}
           />
           <button>Login</button>
@@ -89,7 +92,7 @@ class Login extends React.Component {
       </div>
     );
   }
-};
+
 
 export default Login;
 

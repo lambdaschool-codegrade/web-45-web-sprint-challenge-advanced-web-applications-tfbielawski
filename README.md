@@ -45,7 +45,7 @@ Your finished project must include all of the following requirements. **Unlike o
 * [x] In `Login.js`, build all UI and state functionality needed to capture a username and password.
 * [x] Add in two routes that display the login component, one for the default path '/' and one for the login path '/login'.
 * [x] **Make sure that the input for your username and password includes the id="username" and id="password" attributes. Codegrade autotests will fail without them.**
-* [-->] Build in functionality that would allow an error to be displayed in the provided p tag if either the username or password is incorrect.
+* [x] Build in functionality that would allow an error to be displayed in the provided p tag if either the username or password is incorrect.
 * [x] **Make sure your error p tag has an id="error" attribute attached. Codegrade autotests will fail without them.**
 * [x] Construct an http request that retrieves an auth token from the server when the username `Lambda` and the password `School` is passed into the request.
 * [x] Save the token to localStorage.
@@ -56,7 +56,7 @@ Your finished project must include all of the following requirements. **Unlike o
 #### Consuming the API
 > *Add in the http requests and state changes needed to connect our api to the web application. Consider the effect of authentication on your api requests.*
 
-* [ ] In `services/fetchColorServices.js`, build out fetchColorService function to make a GET request to fetch the color data for your bubbles.
+* [x] In `services/fetchColorServices.js`, build out fetchColorService function to make a GET request to fetch the color data for your bubbles.
 * [ ] When `BubblePages` mounts, call fetchColorServices and save it's result in state.
 * [ ] In `BubblePage.js`, complete `saveEdit`, and `deleteColor` functions to make API requests for to editing and delete data.
 * [ ] Watch and enjoy as your app responds to updates in the data. Check out `Bubbles.js` to see how this is built.
